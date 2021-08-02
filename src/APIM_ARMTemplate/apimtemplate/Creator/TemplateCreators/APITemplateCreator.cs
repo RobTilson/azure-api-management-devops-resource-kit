@@ -330,7 +330,9 @@ namespace Microsoft.Azure.Management.ApiManagement.ArmTemplates.Create
 
         private string MakeServiceUrl(APIConfig api)
         {
-            return !String.IsNullOrEmpty(api.serviceUrl) ? $"[parameters('{api.name + "-ServiceUrl"}')]" : null;
+           // return !String.IsNullOrEmpty(api.serviceUrl) ? $"[parameters('{api.name + "-ServiceUrl"}')]" : null;
+            return api.serviceUrl ?? $"[parameters('{ParameterNames.ServiceUrl}').{ExtractorUtils.GenValidParamName(api.name, ParameterPrefix.Api)}]";
+
         }
     }
 }
